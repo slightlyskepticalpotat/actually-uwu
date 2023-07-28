@@ -28,6 +28,6 @@
     "**/*.tsx",
     "**/*.cjs",
     "**/*.mjs"
-  ],
+, "src/pages/settings.js"  ],
   "exclude": ["node_modules"]
 }

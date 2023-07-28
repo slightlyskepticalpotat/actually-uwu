@@ -1,0 +1,21 @@
+.tweet {
+  background-color: black;
+  color: white;
+  border: 5px solid white;
+  border-radius: 10px;
+  height: auto;
+  background-clip: content-box;
+  font-size: 24px;
+  padding: 100 px;
+}
+.tweet-text {
+  resize: none;
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+  border-radius: 25px;
+  border-color: white;
+  padding: 10px;
+  height: auto;
+  font-size: 24px;
+}
