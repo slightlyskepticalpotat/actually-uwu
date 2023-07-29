@@ -143,8 +143,8 @@ const dayList = days.map((day, index) =>
 </Grid>
 );
 
-var color1= 'blue';
-var color2 = 'white';
+const color1= 'blue';
+const color2 = 'white';
 const subtitles = ['a', 'b', 'c', 'd'];
 const titles = ['Wind', 'Humidity', 'UV', 'Precipitation'];
 
