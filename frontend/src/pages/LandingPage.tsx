@@ -17,6 +17,7 @@ const useStyles = makeStyles({
     },
     leftSide:{
         display:'flex',
+        backgroundColor: '#fefcfb',
         flexDirection: 'column',
         justifyContent: 'center',
         width:'60vw',
@@ -24,16 +25,19 @@ const useStyles = makeStyles({
         gap: '2rem'
     },
     homeButton:{
-        width: '40%',
+        width: '30%',
         padding: '1rem 2rem',
         borderRadius: '1rem',
-        backgroundColor:'#158dfc'
+        backgroundColor:'#546D64',
+        '&:hover': {
+            backgroundColor: '#3a4742',
+        }
     },
     rightSide:{
         display:'flex',
         flexDirection:'column',
         gap: '2rem',
-        backgroundColor: '#e2e2e2',
+        backgroundColor: '#caf0f8',
         height: '100vh',
         width:'40vw',
         padding:'7%'
@@ -41,6 +45,9 @@ const useStyles = makeStyles({
     buttons:{
         display: 'flex',
         gap: '2rem'
+    },
+    keyPoint:{
+        fontWeight: 600,
     }
 })
 
@@ -56,6 +63,9 @@ function LandingPage(){
     <Box className={classes.root}>
         <Box className={classes.leftSide}>
             <Box>
+                <Typography variant="h1" component="h1"className={`${classes.header} ${classes.heading1}`}>
+                    The
+                </Typography>
                 <Typography variant="h1" component="h2"className={classes.header}>
                     Actually Useful
                 </Typography>
@@ -65,8 +75,7 @@ function LandingPage(){
             </Box>
 
             <Typography variant="subtitle1">
-            Instead of bombarding you with information about temperature, humidity, and other pressure, Actually Useful Weather Utility (ActuallyUWU for short) gives you a personalized overview of the weather conditions you&apos;ll encounter during the day with actionable insights you can use to choose regarding your outfit and commute method. Just set your preferences once, and it&apos;ll always be by your side.
-            </Typography>
+            Instead of bombarding you with information about temperature, humidity, and other statistics, the <span className={classes.keyPoint}> Actually Useful Weather Utility (ActuallyUWU)</span> gives you a <span className={classes.keyPoint}>personalised overview</span> of the weather conditions you'll encounter during the day with <span className={classes.keyPoint}>actionable insights</span> you can use to choose your outfit and commute method. <span className={classes.keyPoint}>Set your preferences once,</span> and UWU will always be by your side with helpful recommendations.            </Typography>
             <Box className={classes.buttons}>
                 <Button variant="contained" 
                 className={classes.homeButton}
