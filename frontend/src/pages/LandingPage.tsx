@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import { makeStyles } from '@mui/styles';
+import { useRouter } from "next/router";
 import CommentSkeleton from "~/components/CommentSkeleton";
 
 const useStyles = makeStyles({
@@ -38,9 +39,14 @@ const useStyles = makeStyles({
     }
 })
 
-
 function LandingPage(){
-const classes= useStyles();
+    const router = useRouter();
+
+    const handleButtonClick = () => {
+      router.push('/SurveyPage');
+    };
+    const classes= useStyles();
+
   return (
     <Box className={classes.root}>
         <Box className={classes.leftSide}>
@@ -56,7 +62,10 @@ const classes= useStyles();
             <Typography variant="subtitle1">
             Instead of bombarding you with information about temperature, humidity, and other pressure, Actually Useful Weather Utility (ActuallyUWU for short) gives you a personalized overview of the weather conditions you&apos;ll encounter during the day with actionable insights you can use to choose regarding your outfit and commute method. Just set your preferences once, and it&apos;ll always be by your side.
             </Typography>
-            <Button variant="contained" className={classes.homeButton}>Get Started</Button>
+            <Button variant="contained" 
+            className={classes.homeButton}
+            onClick={handleButtonClick}
+            >Get Started</Button>
         </Box>
         <Box className={classes.rightSide}>
             <CommentSkeleton/>
