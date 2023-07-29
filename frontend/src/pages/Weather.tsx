@@ -1,6 +1,14 @@
 import { Box } from '@mui/material';
 import React, { useState } from 'react';
 import 'dotenv/config'
+import CountrySelect from '~/components/CountrySelect';
+
+//https://api.openweathermap.org/geo/1.0/zip?zip=L6Y4W6,CA&appid=c0f957daa1315f627f7244c78fc760e7
+//
+
+
+
+
 
 const Weather: React.FC = () => {
   const [city, setCity] = useState('');
@@ -27,12 +35,7 @@ const Weather: React.FC = () => {
 
   return (
     <Box>
-      <input
-        type="text"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        placeholder="Enter city name"
-      />
+      <CountrySelect/>
       <button onClick={fetchWeatherData}>Get Weather</button>
       <Box>
 
