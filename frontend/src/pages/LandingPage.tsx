@@ -22,7 +22,7 @@ const useStyles = makeStyles({
         gap: '2rem'
     },
     homeButton:{
-        width: '30%',
+        width: '40%',
         padding: '1rem 2rem',
         borderRadius: '1rem',
         backgroundColor:'#158dfc'
