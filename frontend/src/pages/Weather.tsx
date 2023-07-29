@@ -1,13 +1,20 @@
-import { Box } from '@mui/material';
+import { Autocomplete, Box, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import 'dotenv/config'
-import CountrySelect from '~/components/CountrySelect';
+import COUNTRIES from '~/components/CountrySelect';
+import CountryType from '~/components/CountrySelect';
+
 
 //https://api.openweathermap.org/geo/1.0/zip?zip=L6Y4W6,CA&appid=c0f957daa1315f627f7244c78fc760e7
 //
 
 
-
+interface CountryType {
+  code: string;
+  label: string;
+  phone: string;
+  suggested?: boolean;
+}
 
 
 const Weather: React.FC = () => {
@@ -15,6 +22,7 @@ const Weather: React.FC = () => {
   const [weatherData, setWeatherData] = useState(null);
   const [latitude, setLatitude] = useState(43.65);
   const [longitude, setLongitude] = useState(-79.38);
+  const [countryCode, setCountryCode] = useState("")
 
   const fetchWeatherData = async () => {
     try {
@@ -33,9 +41,22 @@ const Weather: React.FC = () => {
     }
   };
 
+
+
   return (
     <Box>
-      <CountrySelect/>
+      <Autocomplete
+        options={COUNTRIES}
+        disableCloseOnSelect
+        getOptionLabel={(option: CountryType) =>
+          `${option.label} (${option.code}) +${option.phone}`
+        }
+        onChange={(event: any, value: any) => setCountryCode(value["code"])}
+        renderInput={(params) => <TextField {...params} label="Choose a country" />}
+      />
+      <Box>
+        Country Code: {countryCode}
+      </Box>
       <button onClick={fetchWeatherData}>Get Weather</button>
       <Box>
 
