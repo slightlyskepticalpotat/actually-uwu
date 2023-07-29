@@ -33,7 +33,6 @@ const SurveyPage = () => {
             <Box className={classes.container}>
             <Box className={classes.root}>
                 <Autocomplete
-                    className={classes.field}
                     disablePortal
                     id="combo-box-demo"
                     options={top100Films}
@@ -43,7 +42,6 @@ const SurveyPage = () => {
             </Box>
             <Box className={classes.root}>
                 <Autocomplete
-                    className={classes.field}
                     disablePortal
                     id="combo-box-demo"
                     options={top100Films}
