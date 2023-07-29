@@ -1,6 +1,8 @@
 import { Box, Button, Typography } from "@mui/material";
 import { makeStyles } from '@mui/styles';
+import { useRouter } from "next/router";
 import CommentSkeleton from "~/components/CommentSkeleton";
+import LoginButton from "~/components/LoginButton";
 
 const useStyles = makeStyles({
     root:{
@@ -8,7 +10,7 @@ const useStyles = makeStyles({
         gap: '2rem',
     },
     header:{
-        fontWeight: 600,
+        fontWeight: 600, 
     },
     heading1: {
         color:'#4271e7',
@@ -22,7 +24,7 @@ const useStyles = makeStyles({
         gap: '2rem'
     },
     homeButton:{
-        width: '30%',
+        width: '40%',
         padding: '1rem 2rem',
         borderRadius: '1rem',
         backgroundColor:'#158dfc'
@@ -35,12 +37,21 @@ const useStyles = makeStyles({
         height: '100vh',
         width:'40vw',
         padding:'7%'
+    },
+    buttons:{
+        display: 'flex',
+        gap: '2rem'
     }
 })
 
-
 function LandingPage(){
-const classes= useStyles();
+    const router = useRouter();
+
+    const handleButtonClick = () => {
+      router.push('/SurveyPage');
+    };
+    const classes= useStyles();
+
   return (
     <Box className={classes.root}>
         <Box className={classes.leftSide}>
@@ -49,14 +60,20 @@ const classes= useStyles();
                     Actually Useful
                 </Typography>
                 <Typography variant="h1" component="h1" className={`${classes.header} ${classes.heading1}`}>
-                        Weather App
+                        Weather Utility
                 </Typography>
             </Box>
 
             <Typography variant="subtitle1">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi non ex in est eleifend dictum vitae sed lectus. Donec vitae elementum lorem. Nam in nisl a libero faucibus rutrum. Praesent tristique non nisl et facilisis. Quisque interdum suscipit libero consectetur cursus. Morbi at fermentum massa, nec dictum risus. Duis vel libero sit amet tellus elementum posuere eget nec erat.
+            Instead of bombarding you with information about temperature, humidity, and other pressure, Actually Useful Weather Utility (ActuallyUWU for short) gives you a personalized overview of the weather conditions you&apos;ll encounter during the day with actionable insights you can use to choose regarding your outfit and commute method. Just set your preferences once, and it&apos;ll always be by your side.
             </Typography>
-            <Button variant="contained" className={classes.homeButton}>Get Started</Button>
+            <Box className={classes.buttons}>
+                <Button variant="contained" 
+                className={classes.homeButton}
+                onClick={handleButtonClick}
+                >Get Started</Button>
+                <LoginButton/>
+            </Box>
         </Box>
         <Box className={classes.rightSide}>
             <CommentSkeleton/>
