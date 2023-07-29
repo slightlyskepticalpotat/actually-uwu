@@ -31,6 +31,8 @@ const commuteMethod = [
 const rainProtection = [{label:"Nothing"}, {label:"Raincoat"}, {label:"Umbrella"},{label:"Both"}]
 
 
+
+
 const SurveyPage = () => {
     const classes = useStyles();
     const router = useRouter();
@@ -40,19 +42,45 @@ const SurveyPage = () => {
     const [lightRain, setLightRain] = useState('');
     const [heavyRain, setHeavyRain] = useState('');
 
+    const handleSubmit = async (event: { preventDefault: () => void; }) => {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+        event.preventDefault();
+    
+        const preferences = {
+          imperial: useImperial,
+          commute,
+          'light-rain': lightRain,
+          'heavy-rain': heavyRain,
+        };
+    
+        console.log(preferences);
+    
+        try {
+          // Simulate an async operation, like sending data to the server
+          await submitPreferencesToServer(preferences);
+          console.log('Preferences submitted:', preferences);
+          await router.push('/Weather');
+        } catch (error) {
+          console.error('Error while submitting preferences:', error);
+        }
+      };
+        //TODO luci can do all her crud operations here:
+      const submitPreferencesToServer = (data: { imperial: boolean; commute: string; 'light-rain': string; 'heavy-rain': string; }) => {
+        // Simulate an async operation that returns a Promise
+        return new Promise<void>((resolve, reject) => {
+          setTimeout(() => {
+            // Simulate success
+            resolve();
+            // Simulate an error
+            // reject(new Error('Failed to submit preferences'));
+          }, 1000);
+        });
+      };
+
     return (
         <form
-        onSubmit={(event:any) => {
-            event.preventDefault();
-            const preferences = {
-                "imperial": useImperial,
-                "commute": commute,
-                "light-rain": lightRain,
-                "heavy-rain": heavyRain
-            }
-            console.log(preferences)
-            router.push('/Weather');
-        }}>
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+        onSubmit={handleSubmit}>
         <Box className={classes.container}>
             <Box className={classes.root}>
                 <Typography variant="subtitle1"><em>Metric or Imperial</em></Typography>
@@ -68,7 +96,7 @@ const SurveyPage = () => {
                     disablePortal
                     options={commuteMethod}
                     sx={{ width: 300 }}
-                    onChange={(event: any, value: any) => setCommute(value)}
+                    onChange={(event: unknown, value: unknown) => setCommute(value as string)}
                     renderInput={(params) => <TextField {...params} 
                     label="Commute Method" 
                     />}
@@ -80,7 +108,7 @@ const SurveyPage = () => {
                     disablePortal
                     options={rainProtection}
                     sx={{ width: 300 }}
-                    onChange={(event: any, value: any) => setLightRain(value)}
+                    onChange={(event: unknown, value: unknown) => setLightRain(value as string)}
                     renderInput={(params) => <TextField {...params} 
                     label="Light Rain" 
                     />}
@@ -89,7 +117,7 @@ const SurveyPage = () => {
                     disablePortal
                     options={rainProtection}
                     sx={{ width: 300 }}
-                    onChange={(event: any, value: any) => setHeavyRain(value)}
+                    onChange={(event: unknown, value: unknown) => setHeavyRain(value as string)}
                     renderInput={(params) => <TextField {...params} 
                     label="Heavy Rain" 
                     />}
