@@ -1,6 +1,7 @@
 import { Autocomplete, Box, Button, Switch, TextField, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 const useStyles = makeStyles({
     root:{
@@ -34,48 +35,67 @@ const SurveyPage = () => {
     const classes = useStyles();
     const router = useRouter();
 
+    const [useImperial, setImperial] = useState(true);
+    const [commute, setCommute] = useState('');
+    const [lightRain, setLightRain] = useState('');
+    const [heavyRain, setHeavyRain] = useState('');
+
     return (
         <form
-        onSubmit={(event) => {
+        onSubmit={(event:any) => {
             event.preventDefault();
-            console.log("hello")
+            const preferences = {
+                "imperial": useImperial,
+                "commute": commute,
+                "light-rain": lightRain,
+                "heavy-rain": heavyRain
+            }
+            console.log(preferences)
             router.push('/Weather');
         }}>
         <Box className={classes.container}>
-            <Box className={classes.root} id="q1">
+            <Box className={classes.root}>
                 <Typography variant="subtitle1"><em>Metric or Imperial</em></Typography>
                 <Box>
-                    Metric (C°) <Switch /> Imperial (F°) 
+                    Metric (C°) <Switch onChange={(e, v) => {setImperial(v)
+                    console.log(v)
+                    }}/> Imperial (F°) 
                 </Box>
             </Box>
-            <Box className={classes.root} id="q2">
+            <Box className={classes.root}>
                 <Typography variant="subtitle1"><em>What is your preferred method of commute?</em></Typography>
                 <Autocomplete
                     disablePortal
-                    id="combo-box-demo"
                     options={commuteMethod}
                     sx={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Commute Method" />}
+                    onChange={(event: any, value: any) => setCommute(value)}
+                    renderInput={(params) => <TextField {...params} 
+                    label="Commute Method" 
+                    />}
                 />
             </Box>
-            <Box className={classes.root} id="q3">
+            <Box className={classes.root}>
                 <Typography variant="subtitle1"><em>How do you protect yourself when it's raining?</em></Typography>
                 <Autocomplete
                     disablePortal
-                    id="combo-box-demo"
                     options={rainProtection}
                     sx={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Light Rain" />}
+                    onChange={(event: any, value: any) => setLightRain(value)}
+                    renderInput={(params) => <TextField {...params} 
+                    label="Light Rain" 
+                    />}
                 />
                 <Autocomplete
                     disablePortal
-                    id="combo-box-demo"
                     options={rainProtection}
                     sx={{ width: 300 }}
-                    renderInput={(params) => <TextField {...params} label="Heavy Rain" />}
+                    onChange={(event: any, value: any) => setHeavyRain(value)}
+                    renderInput={(params) => <TextField {...params} 
+                    label="Heavy Rain" 
+                    />}
                 />
             </Box>
-            <Box className={classes.root} id="q4">
+            <Box className={classes.root}>
                 <Typography variant="subtitle1"><em>Are you ready to generate your results?</em></Typography>
                 <Button variant="contained" type="submit">Generate</Button>
             </Box>
