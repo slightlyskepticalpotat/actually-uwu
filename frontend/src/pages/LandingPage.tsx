@@ -75,7 +75,7 @@ function LandingPage(){
             </Box>
 
             <Typography variant="subtitle1">
-            Instead of bombarding you with information about temperature, humidity, and other statistics, the <span className={classes.keyPoint}> Actually Useful Weather Utility (ActuallyUWU)</span> gives you a <span className={classes.keyPoint}>personalised overview</span> of the weather conditions you'll encounter during the day with <span className={classes.keyPoint}>actionable insights</span> you can use to choose your outfit and commute method. <span className={classes.keyPoint}>Set your preferences once,</span> and UWU will always be by your side with helpful recommendations.            </Typography>
+            Instead of bombarding you with information about temperature, humidity, and other statistics, the <span className={classes.keyPoint}> Actually Useful Weather Utility (ActuallyUWU)</span> gives you a <span className={classes.keyPoint}>personalised overview</span> of the weather conditions you&apos;ll encounter during the day with <span className={classes.keyPoint}>actionable insights</span> you can use to choose your outfit and commute method. <span className={classes.keyPoint}>Set your preferences once,</span> and UWU will always be by your side with helpful recommendations.            </Typography>
             <Box className={classes.buttons}>
                 <Button variant="contained" 
                 className={classes.homeButton}
