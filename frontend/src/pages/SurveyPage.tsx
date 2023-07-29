@@ -31,8 +31,6 @@ const commuteMethod = [
 const rainProtection = [{label:"Nothing"}, {label:"Raincoat"}, {label:"Umbrella"},{label:"Both"}]
 
 
-
-
 const SurveyPage = () => {
     const classes = useStyles();
     const router = useRouter();
@@ -47,8 +45,8 @@ const SurveyPage = () => {
         event.preventDefault();
     
         const preferences = {
-          imperial: useImperial,
-          commute,
+          'imperial': useImperial,
+          'commute': commute,
           'light-rain': lightRain,
           'heavy-rain': heavyRain,
         };
@@ -65,7 +63,7 @@ const SurveyPage = () => {
         }
       };
         //TODO luci can do all her crud operations here:
-      const submitPreferencesToServer = (data: { imperial: boolean; commute: string; 'light-rain': string; 'heavy-rain': string; }) => {
+      const submitPreferencesToServer = (data: { 'imperial': boolean; 'commute': string; 'light-rain': string; 'heavy-rain': string; }) => {
         // Simulate an async operation that returns a Promise
         return new Promise<void>((resolve, reject) => {
           setTimeout(() => {
