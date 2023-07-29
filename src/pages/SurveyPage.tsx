@@ -2,6 +2,9 @@ import { Autocomplete, Box, Button, Switch, TextField, Typography } from "@mui/m
 import { makeStyles } from "@mui/styles";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import COUNTRIES from '~/components/CountrySelect';
+import CountryType from '~/components/CountrySelect';
+
 
 const useStyles = makeStyles({
     root:{
@@ -17,9 +20,20 @@ const useStyles = makeStyles({
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
+    },
+    countryField:{
+      width: '18vw'
     }
 
 })
+
+interface CountryType {
+  code: string;
+  label: string;
+  phone: string;
+  suggested?: boolean;
+}
+
 
 const commuteMethod = [
     {label:"Walking"}, 
@@ -35,10 +49,12 @@ const SurveyPage = () => {
     const classes = useStyles();
     const router = useRouter();
 
+    const [countryCode, setCountryCode] = useState("")
     const [useImperial, setImperial] = useState(true);
     const [commute, setCommute] = useState('');
     const [lightRain, setLightRain] = useState('');
     const [heavyRain, setHeavyRain] = useState('');
+    const [cityCode, setCityCode] = useState('');
 
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
@@ -49,6 +65,8 @@ const SurveyPage = () => {
           'commute': commute,
           'light-rain': lightRain,
           'heavy-rain': heavyRain,
+          'country-code': countryCode,
+          'city': cityCode
         };
     
         console.log(preferences);
@@ -80,6 +98,27 @@ const SurveyPage = () => {
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onSubmit={handleSubmit}>
         <Box className={classes.container}>
+          <Box className={classes.root}>
+              <Typography variant="subtitle1"><em>What country are you from?</em></Typography>
+                <Autocomplete
+                  options={COUNTRIES}
+                  className={classes.countryField}
+                  disableCloseOnSelect
+                  getOptionLabel={(option: CountryType) =>
+                    `${option.label} (${option.code}) +${option.phone}`
+                  }
+                  onChange={(event, value:CountryType) => setCountryCode(value.code)}
+                  renderInput={(params) => <TextField {...params} label="Choose a country" />}
+                />
+            </Box>
+            <Box className={classes.root}>
+            <Typography variant="subtitle1"><em>What city are you from?</em></Typography>
+              <TextField 
+              label="City" 
+              variant="outlined" 
+              onChange={(event) => setCityCode(event.target.value)}
+              /> 
+            </Box>
             <Box className={classes.root}>
                 <Typography variant="subtitle1"><em>Metric or Imperial</em></Typography>
                 <Box>
