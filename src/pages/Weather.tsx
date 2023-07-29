@@ -7,6 +7,11 @@ import COUNTRIES from '~/components/CountrySelect';
 import CountryType from '~/components/CountrySelect';
 import Outfit from '~/components/Outfit';
 
+import Cloud from '@mui/icons-material/Cloud';
+import Sun from '@mui/icons-material/LightMode';
+
+import sunhat from '../images/outfits/sunhat.png';
+
 //https://api.openweathermap.org/geo/1.0/zip?zip=L6Y4W6,CA&appid=c0f957daa1315f627f7244c78fc760e7
 //
 
@@ -52,7 +57,7 @@ const useStyles = makeStyles({
         justifyContent: 'center',
         width:'60vw',
         padding: '5rem',
-        backgroundColor: '#e2e2e2',
+        backgroundColor: '#CAF0F8',
         gap: '2rem'
     },
     homeButton:{
@@ -68,7 +73,7 @@ const useStyles = makeStyles({
 
         height: '100vh',
         width:'40vw',
-        padding:'7%'
+        padding:'2%'
     },
     currentWeather: {
         height:'50vh',
@@ -80,8 +85,8 @@ const useStyles = makeStyles({
         height:'20vh',
     },
     blue: {
-        backgroundColor: 'blue',
-        color: 'white',
+        backgroundColor: '#4271E7',
+        color: '#FEFCFB',
         height: '100%',
         borderRadius: '5%',
         padding: '5%'
@@ -105,7 +110,7 @@ const useStyles = makeStyles({
         display: 'block'
         },
     blueUnderline: {
-        borderBottom: '0.2rem solid blue',
+        borderBottom: '0.2rem solid #4271E7',
         width: '100%',
         display: 'block'    
     },
@@ -122,12 +127,12 @@ const dayList = days.map((day, index) =>
  <Grid item key = {index} xs={1}>
   <Box sx={{
         backgroundColor: 'white',
-        color: 'blue',
+        color: '#4271E7',
         height: '100%',
         borderRadius: '5%',
         padding: '5%'
     }}>
-      <Box sx={{borderBottom: '0.2rem solid blue',
+      <Box sx={{borderBottom: '0.2rem solid #4271E7',
         width: '100%',
         display: 'block' }}>{day}</Box>
 
@@ -152,7 +157,7 @@ const titleList = titles.map((title, index) =>
 if (index%2===0) {
     return <Grid key = {index} item xs={3}>
     <Box sx={{
-        backgroundColor: 'blue',
+        backgroundColor: '#4271E7',
         color: 'white',
         height: '100%',
         borderRadius: '5%',
@@ -178,13 +183,13 @@ else{
 return <Grid key = {index} item xs={3}>
     <Box sx={{
         backgroundColor: 'white',
-        color: 'blue',
+        color: '#4271E7',
         height: '100%',
         borderRadius: '5%',
         padding: '5%'
     }}>
     <Box sx={{
-        borderBottom: '0.2rem solid blue',
+        borderBottom: '0.2rem solid #4271E7',
         width: '100%',
         display: 'block'
         }}>{title}</Box>
@@ -269,7 +274,7 @@ const Weather: React.FC = () => {
                     <Box height='90%' className={classes.iconAndTemp}   justifyContent="space-evenly">
                         <img width="25%" src="icons/cloud.png"></img>
                         <Box >
-                            <Typography color='blue' alignItems='end' fontSize='300%'fontWeight='700'>23°C</Typography>
+                            <Typography color='#4271E7' alignItems='end' fontSize='300%'fontWeight='700'>23°C</Typography>
                             <Typography color='gray' alignItems='end' fontSize='85%'>Feels like 30°C</Typography>
                         </Box>
                     </Box>
@@ -290,7 +295,7 @@ const Weather: React.FC = () => {
             </Grid>
         </Box>
         <Box className={classes.rightSide}>
-          <Outfit/>
+          <Outfit outfitPic={sunhat} heading={"Hat"} description={"Wide-brimmed sunhat"} icon={<Sun/>} chipColor={"warning"} chipDescription={"It is sunny outside!"}/>
         </Box>
     </Box>
       </Box>
