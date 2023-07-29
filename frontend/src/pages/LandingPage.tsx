@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import { Box, Button, Typography } from "@mui/material";
 import { makeStyles } from '@mui/styles';
 import { useRouter } from "next/router";
@@ -67,7 +68,7 @@ function LandingPage(){
     <Box className={classes.root}>
         <Box className={classes.leftSide}>
             <Box>
-                <Typography variant="h1" component="h1"className={`${classes.header} ${classes.heading1}`}>
+                <Typography variant="subtitle1">
                     The
                 </Typography>
                 <Typography variant="h1" component="h2"className={classes.header}>

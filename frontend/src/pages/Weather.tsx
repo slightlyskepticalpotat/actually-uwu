@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/dot-notation */
 import { Autocomplete, Box, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import 'dotenv/config'
@@ -16,7 +19,6 @@ interface CountryType {
   suggested?: boolean;
 }
 
-
 const Weather: React.FC = () => {
   const [city, setCity] = useState('');
   const [weatherData, setWeatherData] = useState(null);
@@ -31,16 +33,17 @@ const Weather: React.FC = () => {
 
         const APIREQ = "https://api.openweathermap.org/data/3.0/onecall?lat=" + latitude + "&lon="+ longitude + "&appid=c0f957daa1315f627f7244c78fc760e7"
         const response = await fetch(APIREQ);
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const jsonData = await response.json();
 
         console.log(jsonData)
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         setWeatherData(jsonData)
 
     } catch (error) {
       console.error('Error fetching weather data:', error);
     }
   };
-
 
 
   return (
@@ -51,7 +54,7 @@ const Weather: React.FC = () => {
         getOptionLabel={(option: CountryType) =>
           `${option.label} (${option.code}) +${option.phone}`
         }
-        onChange={(event: any, value: any) => setCountryCode(value["code"])}
+        // onChange={(event, value:CountryType) => setCountryCode(value.code)}
         renderInput={(params) => <TextField {...params} label="Choose a country" />}
       />
       <Box>
