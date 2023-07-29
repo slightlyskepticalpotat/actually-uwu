@@ -8,7 +8,7 @@ const useStyles = makeStyles({
         gap: '2rem',
     },
     header:{
-        fontWeight: 600,
+        fontWeight: 600, 
     },
     heading1: {
         color:'#4271e7',
