@@ -21,10 +21,18 @@ const useStyles = makeStyles({
         flexDirection: 'column',
         overflow: 'hidden',
     },
+    submitButton:{
+      width: '15%',
+      padding: '1rem 2rem',
+      borderRadius: '1rem',
+      backgroundColor:'#546D64',
+      '&:hover': {
+          backgroundColor: '#3a4742',
+        }
+    },
     countryField:{
       width: '18vw'
     }
-
 })
 
 interface CountryType {
@@ -120,7 +128,7 @@ const SurveyPage = () => {
               /> 
             </Box>
             <Box className={classes.root}>
-                <Typography variant="subtitle1"><em>Metric or Imperial</em></Typography>
+                <Typography variant="subtitle1"><em>First question! Do you use the Metric or Imperial system when measuring temperatures?</em></Typography>
                 <Box>
                     Metric (C°) <Switch onChange={(e, v) => {setImperial(v)
                     console.log(v)
@@ -162,7 +170,7 @@ const SurveyPage = () => {
             </Box>
             <Box className={classes.root}>
                 <Typography variant="subtitle1"><em>Are you ready to generate your results?</em></Typography>
-                <Button variant="contained" type="submit">Generate</Button>
+                <Button className={classes.submitButton} variant="contained" type="submit">Generate</Button>
             </Box>
             </Box>
         </form>
