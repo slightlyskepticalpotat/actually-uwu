@@ -54,7 +54,7 @@ const Weather: React.FC = () => {
         getOptionLabel={(option: CountryType) =>
           `${option.label} (${option.code}) +${option.phone}`
         }
-        onChange={(event, value:CountryType) => setCountryCode(value.code)}
+        // onChange={(event, value:CountryType) => setCountryCode(value.code)}
         renderInput={(params) => <TextField {...params} label="Choose a country" />}
       />
       <Box>
