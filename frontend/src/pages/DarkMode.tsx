@@ -5,7 +5,7 @@ import { useTheme, ThemeProvider, createTheme } from '@mui/material/styles';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 
-// tslint:disable-next-line:no-empty
+// eslint-disable-next-line no-empty-function
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 function DarkMode() {
