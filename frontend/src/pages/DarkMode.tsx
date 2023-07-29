@@ -60,5 +60,3 @@ export default function ToggleColorMode() {
     </ColorModeContext.Provider>
   );
 }
-
-export default DarkMode
