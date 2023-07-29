@@ -10,8 +10,7 @@ const Weather: React.FC = () => {
   const fetchWeatherData = async () => {
     try {
         const options = {method: 'GET', headers: {accept: 'application/json'}};
-
-        fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid='c0f957daa1315f627f7244c78fc760e7`, options)
+        fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${process.env.API_KEY}`, options)
           .then(response => response.json())
           .then(response => {setWeatherData(response)
                             console.log(response)})
