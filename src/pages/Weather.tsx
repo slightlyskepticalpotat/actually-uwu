@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import 'dotenv/config'
 import COUNTRIES from '~/components/CountrySelect';
 import CountryType from '~/components/CountrySelect';
+import Outfit from '~/components/Outfit';
 
 
 //https://api.openweathermap.org/geo/1.0/zip?zip=L6Y4W6,CA&appid=c0f957daa1315f627f7244c78fc760e7
@@ -70,7 +71,9 @@ const Weather: React.FC = () => {
           <p>No data fetched yet.</p>
         )}
       </Box>
+      <Outfit/>
     </Box>
+
   );
 };
 
