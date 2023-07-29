@@ -60,7 +60,6 @@ const Weather: React.FC = () => {
       <Box>
         Country Code: {countryCode}
       </Box>
-
       <button onClick={fetchWeatherData}>Get Weather</button>
       <Box>
 
