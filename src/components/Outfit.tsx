@@ -8,6 +8,9 @@ import Typography from '@mui/joy/Typography';
 import Cloud from '@mui/icons-material/Cloud';
 import Sun from '@mui/icons-material/LightMode';
 
+import Image, { StaticImageData } from 'next/image';
+import sunhat from '../images/outfits/sunhat.png'
+
 export default function Outfit() {
   return (
     <Card
@@ -20,12 +23,7 @@ export default function Outfit() {
       }}
     >
       <AspectRatio ratio="1" sx={{ width: 90 }}>
-        <img
-          src="https://images.unsplash.com/photo-1507833423370-a126b89d394b?auto=format&fit=crop&w=90"
-          srcSet="https://images.unsplash.com/photo-1507833423370-a126b89d394b?auto=format&fit=crop&w=90&dpr=2 2x"
-          loading="lazy"
-          alt=""
-        />
+        <Image src={ sunhat } alt=""/>
       </AspectRatio>
       <CardContent>
         <Typography level="h2" fontSize="lg" id="card-description" mb={0.5}>
