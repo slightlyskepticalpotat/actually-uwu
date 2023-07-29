@@ -4,8 +4,12 @@ import React from "react";
 const Profile = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
 
+  if (!user) {
+    return <div>Login required</div>;
+  }
+  
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <div>Loading...</div>;
   }
 
   return (
