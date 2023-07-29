@@ -75,7 +75,7 @@ const SurveyPage = () => {
                 />
             </Box>
             <Box className={classes.root}>
-                <Typography variant="subtitle1"><em>How do you protect yourself when it's raining?</em></Typography>
+                <Typography variant="subtitle1"><em>How do you protect yourself when it&apos;s raining?</em></Typography>
                 <Autocomplete
                     disablePortal
                     options={rainProtection}
