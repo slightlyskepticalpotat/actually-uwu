@@ -4,6 +4,10 @@ import { useRouter } from "next/router";
 import CommentSkeleton from "~/components/CommentSkeleton";
 import LoginButton from "~/components/LoginButton";
 
+import userPref from '../images/user_pref.png'
+import weather from '../images/weather.png'
+import outfit from '../images/outfit.png'
+
 const useStyles = makeStyles({
     root:{
         display:'flex',
@@ -85,9 +89,9 @@ function LandingPage(){
             </Box>
         </Box>
         <Box className={classes.rightSide}>
-            <CommentSkeleton/>
-            <CommentSkeleton/>
-            <CommentSkeleton/>
+            <CommentSkeleton promptImg={userPref} content={"Set your custom preferences!"}/>
+            <CommentSkeleton promptImg={weather} content={"Get real-time weather updates!"}/>
+            <CommentSkeleton promptImg={outfit} content={"Get outfit reccomendations!"}/>
         </Box>
     </Box>
   );
