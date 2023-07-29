@@ -46,7 +46,7 @@ export default function Outfit() {
           startDecorator={<Sun/>}
           sx={{ pointerEvents: 'none' }}
         >
-          It's sunny outside!
+          It&apos;s sunny outside!
         </Chip>
       </CardContent>
     </Card>
