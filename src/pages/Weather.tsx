@@ -119,7 +119,7 @@ const useStyles = makeStyles({
 const days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
 const dayWeather = ['1','2','3','4','5','6','7']
 const dayList = days.map((day, index) =>
- <Grid item xs={1}>
+ <Grid item key = {index} xs={1}>
   <Box sx={{
         backgroundColor: 'white',
         color: 'blue',
@@ -143,15 +143,14 @@ const dayList = days.map((day, index) =>
 </Grid>
 );
 
-const color1= 'blue';
-const color2 = 'white';
+
 const subtitles = ['a', 'b', 'c', 'd'];
 const titles = ['Wind', 'Humidity', 'UV', 'Precipitation'];
 
 const titleList = titles.map((title, index) => 
 {
 if (index%2===0) {
-    return <Grid item xs={3}>
+    return <Grid key = {index} item xs={3}>
     <Box sx={{
         backgroundColor: 'blue',
         color: 'white',
@@ -176,16 +175,16 @@ if (index%2===0) {
     </Grid>
 }
 else{
-return <Grid item xs={3}>
+return <Grid key = {index} item xs={3}>
     <Box sx={{
-        backgroundColor: color2,
-        color: color1,
+        backgroundColor: 'white',
+        color: 'blue',
         height: '100%',
         borderRadius: '5%',
         padding: '5%'
     }}>
     <Box sx={{
-        borderBottom: '0.2rem solid white',
+        borderBottom: '0.2rem solid blue',
         width: '100%',
         display: 'block'
         }}>{title}</Box>
