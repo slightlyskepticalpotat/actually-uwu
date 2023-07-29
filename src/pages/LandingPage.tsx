@@ -92,7 +92,7 @@ function LandingPage(){
         <Box className={classes.rightSide}>
             <CommentSkeleton promptImg={userPref} content={"Set your custom preferences!"}/>
             <CommentSkeleton promptImg={weather} content={"Get real-time weather updates!"}/>
-            <CommentSkeleton promptImg={outfit} content={"Get outfit reccomendations!"}/>
+            <CommentSkeleton promptImg={outfit} content={"Get outfit recommendations!"}/>
         </Box>
     </Box>
   );
