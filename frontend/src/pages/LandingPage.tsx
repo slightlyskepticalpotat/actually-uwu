@@ -55,7 +55,7 @@ function LandingPage(){
     const router = useRouter();
 
     const handleButtonClick = () => {
-      router.push('/SurveyPage');
+      router.push('/SurveyPage').catch(() => 'obligatory catch');
     };
     const classes= useStyles();
 
