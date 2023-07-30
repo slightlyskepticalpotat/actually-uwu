@@ -1,7 +1,7 @@
 # ActuallyUWU: Useful Weather Utility 
 
 ## Usage
-You can check out our hosted instance at [https://actuallyuwu.com](https://actuallyuwu.com).
+You can check out our hosted instance at [https://actuallyuwu.com](https://actuallyuwu.com). Or host your own with the instructions below.
 
 ## Installation
 ```bash
