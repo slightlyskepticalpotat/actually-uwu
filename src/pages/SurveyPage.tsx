@@ -35,6 +35,15 @@ const useStyles = makeStyles({
     }
 })
 
+interface userPreferences {
+  'imperial': boolean;
+  'commute': string;
+  'light-rain': string;
+  'heavy-rain': string;
+  'country-code': string;
+  'city': string;
+}
+
 interface CountryType {
   code: string;
   label: string;
@@ -68,7 +77,7 @@ const SurveyPage = () => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
         event.preventDefault();
     
-        const preferences = {
+        const preferences: userPreferences = {
           'imperial': useImperial,
           'commute': commute,
           'light-rain': lightRain,
