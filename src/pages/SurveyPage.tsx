@@ -107,7 +107,7 @@ const SurveyPage = () => {
         onSubmit={handleSubmit}>
         <Box className={classes.container}>
           <Box className={classes.root}>
-              <Typography variant="subtitle1"><em>What country are you from?</em></Typography>
+              <Typography variant="subtitle1"><em>First question! What country are you from?</em></Typography>
                 <Autocomplete
                   options={COUNTRIES}
                   className={classes.countryField}
@@ -130,7 +130,7 @@ const SurveyPage = () => {
               /> 
             </Box>
             <Box className={classes.root}>
-                <Typography variant="subtitle1"><em>First question! Do you use the Metric or Imperial system when measuring temperatures?</em></Typography>
+                <Typography variant="subtitle1"><em>Do you use the Metric or Imperial system when measuring temperatures?</em></Typography>
                 <Box>
                     Metric (C°) <Switch onChange={(e, v) => {setImperial(v)
                     console.log(v)

@@ -7,6 +7,11 @@ import COUNTRIES from '~/components/CountrySelect';
 import CountryType from '~/components/CountrySelect';
 import Outfit from '~/components/Outfit';
 
+import Cloud from '@mui/icons-material/Cloud';
+import Sun from '@mui/icons-material/LightMode';
+
+import sunhat from '../images/outfits/sunhat.png';
+
 //https://api.openweathermap.org/geo/1.0/zip?zip=L6Y4W6,CA&appid=c0f957daa1315f627f7244c78fc760e7
 //
 
@@ -25,6 +30,10 @@ const useStyles = makeStyles({
         fontSize: '150%',
         textAlign: 'left'
     },
+    rightHeader:{
+      fontWeight: 700,
+      fontSize: '150%',
+  },
     titleBox:{
         fontWeight: 800,
         fontSize: '150%',
@@ -42,7 +51,7 @@ const useStyles = makeStyles({
         justifyContent: 'center',
         width:'60vw',
         padding: '5rem',
-        backgroundColor: '#e2e2e2',
+        backgroundColor: '#CAF0F8',
         gap: '2rem'
     },
     homeButton:{
@@ -58,7 +67,7 @@ const useStyles = makeStyles({
 
         height: '100vh',
         width:'40vw',
-        padding:'7%'
+        padding:'2%'
     },
     currentWeather: {
         height:'50vh',
@@ -70,8 +79,8 @@ const useStyles = makeStyles({
         height:'20vh',
     },
     blue: {
-        backgroundColor: 'blue',
-        color: 'white',
+        backgroundColor: '#4271E7',
+        color: '#FEFCFB',
         height: '100%',
         borderRadius: '5%',
         padding: '5%'
@@ -95,7 +104,7 @@ const useStyles = makeStyles({
         display: 'block'
         },
     blueUnderline: {
-        borderBottom: '0.2rem solid blue',
+        borderBottom: '0.2rem solid #4271E7',
         width: '100%',
         display: 'block'    
     },
@@ -104,7 +113,17 @@ const useStyles = makeStyles({
         align:'center',
         alignItems:'center',
         padding: '1rem'
-    }
+    },
+    submitButton:{
+      width: '30%',
+      color: 'white',
+      padding: '1rem 2rem',
+      borderRadius: '1rem',
+      backgroundColor:'#546D64',
+      '&:hover': {
+          backgroundColor: '#3a4742',
+        }
+    },
 })
 const days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
 const dayWeather = ['1','2','3','4','5','6','7']
@@ -112,12 +131,12 @@ const dayList = days.map((day, index) =>
  <Grid item key = {index} xs={1}>
   <Box sx={{
         backgroundColor: 'white',
-        color: 'blue',
+        color: '#4271E7',
         height: '100%',
         borderRadius: '5%',
         padding: '5%'
     }}>
-      <Box sx={{borderBottom: '0.2rem solid blue',
+      <Box sx={{borderBottom: '0.2rem solid #4271E7',
         width: '100%',
         display: 'block' }}>{day}</Box>
 
@@ -142,7 +161,7 @@ const titleList = titles.map((title, index) =>
 if (index%2===0) {
     return <Grid key = {index} item xs={3}>
     <Box sx={{
-        backgroundColor: 'blue',
+        backgroundColor: '#4271E7',
         color: 'white',
         height: '100%',
         borderRadius: '5%',
@@ -168,13 +187,13 @@ else{
 return <Grid key = {index} item xs={3}>
     <Box sx={{
         backgroundColor: 'white',
-        color: 'blue',
+        color: '#4271E7',
         height: '100%',
         borderRadius: '5%',
         padding: '5%'
     }}>
     <Box sx={{
-        borderBottom: '0.2rem solid blue',
+        borderBottom: '0.2rem solid #4271E7',
         width: '100%',
         display: 'block'
         }}>{title}</Box>
@@ -230,7 +249,7 @@ const Weather: React.FC = () => {
         <Box className={classes.leftSide}>
         <Box className={classes.titleBox}>
 
-        <button onClick={fetchWeatherData}>Get Weather</button>
+        <button className={classes.submitButton} onClick={fetchWeatherData}>Get Weather</button>
         </Box>
         <Box>
   
@@ -247,7 +266,7 @@ const Weather: React.FC = () => {
                     <Box height='90%' className={classes.iconAndTemp}   justifyContent="space-evenly">
                         <img width="25%" src="icons/cloud.png"></img>
                         <Box >
-                            <Typography color='blue' alignItems='end' fontSize='300%'fontWeight='700'>23°C</Typography>
+                            <Typography color='#4271E7' alignItems='end' fontSize='300%'fontWeight='700'>23°C</Typography>
                             <Typography color='gray' alignItems='end' fontSize='85%'>Feels like 30°C</Typography>
                         </Box>
                     </Box>
@@ -268,7 +287,11 @@ const Weather: React.FC = () => {
             </Grid>
         </Box>
         <Box className={classes.rightSide}>
-          <Outfit/>
+          <h1 className={classes.rightHeader}>Your Recommended Outfit</h1>
+          <Grid container columns={2}>
+          <Outfit outfitPic={sunhat} heading={"Hat"} description={"Wide-brimmed sunhat"} icon={<Sun/>} chipColor={"warning"} chipDescription={"It is sunny outside!"}/>
+          <Outfit outfitPic={sunhat} heading={"Hat"} description={"Wide-brimmed sunhat"} icon={<Sun/>} chipColor={"warning"} chipDescription={"It is sunny outside!"}/>
+          </Grid>
         </Box>
     </Box>
       </Box>

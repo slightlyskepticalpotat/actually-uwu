@@ -3,15 +3,22 @@ import AspectRatio from '@mui/joy/AspectRatio';
 import Link from '@mui/joy/Link';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
-import Chip from '@mui/joy/Chip';
+import Chip, { ChipPropsColorOverrides } from '@mui/joy/Chip';
 import Typography from '@mui/joy/Typography';
-import Cloud from '@mui/icons-material/Cloud';
-import Sun from '@mui/icons-material/LightMode';
 
 import Image, { StaticImageData } from 'next/image';
-import sunhat from '../images/outfits/sunhat.png'
+import { ReactNode } from 'react';
 
-export default function Outfit() {
+interface OutfitProps {
+    outfitPic: StaticImageData; 
+    heading: string; 
+    description: string;
+    icon: ReactNode;
+    chipColor: any;
+    chipDescription: string;
+}
+
+export default function Outfit({ outfitPic, heading, description, icon, chipColor, chipDescription }: OutfitProps) {
   return (
     <Card
       variant="outlined"
@@ -20,14 +27,15 @@ export default function Outfit() {
         width: 320,
         borderColor: '#CAF0F8',
         '&:hover': { boxShadow: 'md', borderColor: '#78a2ab' },
+        margin: '1%'
       }}
     >
       <AspectRatio ratio="1" sx={{ width: 90 }}>
-        <Image src={ sunhat } alt=""/>
+        <Image src={ outfitPic } alt=""/>
       </AspectRatio>
       <CardContent>
         <Typography level="h2" fontSize="lg" id="card-description" mb={0.5}>
-          Hat
+          {heading}
         </Typography>
         <Typography fontSize="sm" aria-describedby="card-description" mb={1}>
           <Link
@@ -36,17 +44,17 @@ export default function Outfit() {
             href="#interactive-card"
             sx={{ color: 'text.tertiary' }}
           >
-            Wide-brimmed sunhat
+            {description}
           </Link>
         </Typography>
         <Chip
           variant="solid"
-          color="warning"
+          color={chipColor}
           size="md"
-          startDecorator={<Sun/>}
+          startDecorator={icon}
           sx={{ pointerEvents: 'none' }}
         >
-          It&apos;s sunny outside!
+          {chipDescription}
         </Chip>
       </CardContent>
     </Card>

@@ -14,8 +14,8 @@ const useStyles = makeStyles({
 })
 
 interface CommentSkeletonProps {
-  promptImg: StaticImageData; // Replace 'string' with the appropriate type for the 'promptImg' prop
-  content: string; // Replace 'string' with the appropriate type for the 'content' prop
+  promptImg: StaticImageData; 
+  content: string; 
 }
 
 export default function CommentSkeleton({ promptImg, content }: CommentSkeletonProps) {
