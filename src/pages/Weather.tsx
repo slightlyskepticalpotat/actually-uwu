@@ -1,5 +1,5 @@
 import { makeStyles } from '@mui/styles';
-import {Box, Grid, Typography} from '@mui/material';
+import {Box, Card, CardActionArea, CardContent, CardMedia, Grid, Typography} from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import 'dotenv/config'
 
@@ -60,7 +60,8 @@ const useStyles = makeStyles({
         display:'flex',
         flexDirection:'column',
         gap: '2rem',
-
+        justifyContent: 'center',
+        alignItems: 'center',
         height: '100vh',
         width:'40vw',
         padding:'2%'
@@ -146,7 +147,7 @@ const Weather: React.FC = () => {
     const [useImperial, setUseImperial] = useState(false);
     const [city, setCity] = useState<string | null>(null);
     const [country, setCountry] = useState<string | null>(null);
-    const [latitude, setLatitude] = useState<number | null>(43.65);
+    const [commuteMethod, setCommuteMethod] = useState<string | null >(null);
 
     useEffect(() => {
       // Retrieve the JSON string from localStorage
@@ -156,16 +157,14 @@ const Weather: React.FC = () => {
         // Parse the JSON string back to an object
         const parsedPreferences: UserPreferences = JSON.parse(preferencesJSON);
         // setPreferences(parsedPreferences);
-        const city = (parsedPreferences ? parsedPreferences.city : "Toronto")
+        setCity(parsedPreferences ? parsedPreferences.city : "Toronto")
         console.log(city)
-        const country = ( parsedPreferences ? parsedPreferences['country-code'] : "CA")
+        setCountry( parsedPreferences ? parsedPreferences["country-code"] : "CA")
         console.log(country)
-        
-        
         setUseImperial(parsedPreferences ? parsedPreferences.imperial :false);
+        setCommuteMethod(parsedPreferences ? parsedPreferences.commute["label"] :'Walking')
       }
-      const GEOAPIREQ = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + ","+ country +"&limit=5&appid=c0f957daa1315f627f7244c78fc760e7";
-      console.log(GEOAPIREQ)
+      
       
     }, []);
     
@@ -175,14 +174,20 @@ const Weather: React.FC = () => {
     
     // const [longitude, setLongitude] = useState(-79.38);
     // const latitude:number = 43.65;
-    const longitude:number = -79.38;
 
     const classes= useStyles();
     useEffect(() => {
     const fetchWeatherData = async () => {
       try {
+        const GEOAPIREQ = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + ","+ country +"&limit=5&appid=c0f957daa1315f627f7244c78fc760e7";
+        const geoResponse = await fetch(GEOAPIREQ);
+        const geoData = await geoResponse.json()
+        console.log(geoData)
+        // const parsedGeoData = JSON.parse(geoData)
+        
+        const latitude = geoData[0].lat
+        const longitude = geoData[0].lon
 
-          
           // console.log(process.env.API_KEY)
 
           const APIREQ = "https://api.openweathermap.org/data/3.0/onecall?lat=" + latitude + "&lon="+ longitude + "&appid=c0f957daa1315f627f7244c78fc760e7"
@@ -307,14 +312,15 @@ const Weather: React.FC = () => {
         </Grid>
         );
     return (
-      <Box>
-         {/* <pre>{JSON.stringify(preferences, null, 2)}</pre> */}
-    <Box className={classes.root}>
+        <Box>
+            {/* <pre>{JSON.stringify(preferences, null, 2)}</pre> */}
+        <Box className={classes.root}>
         
         <Box className={classes.leftSide}>
         <Box className={classes.titleBox}>
         <Typography variant="h4">Location: {city}</Typography>
         </Box>
+        <CardActionArea>
             <Box  className={classes.currentWeather}>
                 <Box height='80%' className={classes.header}  justify-content="center">Current Weather
                     <Box height='90%' className={classes.iconAndTemp}   justifyContent="space-evenly">
@@ -325,31 +331,46 @@ const Weather: React.FC = () => {
                         </Box>
                     </Box>
                 </Box>
+        
                 <Grid container columnSpacing={5}>
                     {titleList}
                 </Grid>
             </Box>
-
+            </CardActionArea>
             <Grid container columns={8} className={classes.week}>
                 <Grid item xs={1}>
-                    <Box className={classes.blue}>
-                            <Box className={classes.whiteUnderline}>Date</Box>
-                        </Box>
+                    <Card className={classes.blue}>
+                        <Box className={classes.whiteUnderline}>Date</Box>
+                    </Card>
                 </Grid>
-                {dayList}
-                
+                    {dayList}
             </Grid>
         </Box>
         <Box className={classes.rightSide}>
-          <h1 className={classes.rightHeader}>Your Recommended Outfit</h1>
-          <Grid container columns={2}>
-          <Outfit outfitPic={sunhat} heading={"Hat"} description={"Wide-brimmed sunhat"} icon={<Sun/>} chipColor={"warning"} chipDescription={"It is sunny outside!"}/>
-          <Outfit outfitPic={sunhat} heading={"Hat"} description={"Wide-brimmed sunhat"} icon={<Sun/>} chipColor={"warning"} chipDescription={"It is sunny outside!"}/>
-          </Grid>
+          <Typography className={classes.rightHeader}>Your Recommended Item</Typography>
+          <Outfit outfitPic={sunhat} heading={"Hat"} description={"Wide-brimmed sunhat"} icon={<Cloud/>} chipColor={"primary"} chipDescription={"The weather is a bit cloudy"}/>
+          <Typography className={classes.rightHeader}>Your Commute Method</Typography>
+          <Card sx={{ maxWidth: 345 }}>
+            <CardActionArea>
+                <CardMedia
+                component="img"
+                height="140"
+                image="https://rideamigos.com/wp-content/uploads/2018/06/commute-trip-reduction-software-1500x844.png"
+                alt="commuting is fun!"
+                />
+                <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                    {commuteMethod}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                    The weather is perfect for this!
+                </Typography>
+                </CardContent>
+            </CardActionArea>
+            </Card>
         </Box>
     </Box>
       </Box>
-
     );
   };
   
