@@ -180,7 +180,7 @@ const SettingsModal = () => {
                     onChange={(event: unknown, value: unknown) => {
                       setHeavyRain(value as string)
                       if (preferences) {
-                        preferences["heavy-rain"] = value as string;
+                        preferences["heavy-rain"] = value as boolean;
                         //console.log(preferences);
                       }
                     }}
