@@ -66,12 +66,12 @@ const SurveyPage = () => {
     const classes = useStyles();
     const router = useRouter();
 
-    const [countryCode, setCountryCode] = useState("")
-    const [useImperial, setImperial] = useState(true);
-    const [commute, setCommute] = useState('');
-    const [lightRain, setLightRain] = useState('');
-    const [heavyRain, setHeavyRain] = useState('');
-    const [cityCode, setCityCode] = useState('');
+    const [countryCode, setCountryCode] = useState("Canada")
+    const [useImperial, setImperial] = useState(false);
+    const [commute, setCommute] = useState("Walking");
+    const [lightRain, setLightRain] = useState("Umbrella");
+    const [heavyRain, setHeavyRain] = useState("Umbrella");
+    const [cityCode, setCityCode] = useState("Toronto");
 
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
