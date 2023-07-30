@@ -1,4 +1,3 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import { makeStyles } from '@mui/styles';
 import React from "react";
 
@@ -17,9 +16,8 @@ const useStyles = makeStyles({
 
 const LoginButton = () => {
   const classes= useStyles();
-  const { loginWithRedirect } = useAuth0();
 
-  return <button  className={classes.loginButton} onClick={() => loginWithRedirect()}>LOG IN</button>;
+  return <a className={classes.loginButton} href="/api/auth/login">Login</a>;
 };
 
 export default LoginButton;
