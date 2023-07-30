@@ -30,6 +30,10 @@ const useStyles = makeStyles({
         fontSize: '150%',
         textAlign: 'left'
     },
+    rightHeader:{
+      fontWeight: 700,
+      fontSize: '150%',
+  },
     titleBox:{
         fontWeight: 800,
         fontSize: '150%',
@@ -109,7 +113,17 @@ const useStyles = makeStyles({
         align:'center',
         alignItems:'center',
         padding: '1rem'
-    }
+    },
+    submitButton:{
+      width: '30%',
+      color: 'white',
+      padding: '1rem 2rem',
+      borderRadius: '1rem',
+      backgroundColor:'#546D64',
+      '&:hover': {
+          backgroundColor: '#3a4742',
+        }
+    },
 })
 const days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
 const dayWeather = ['1','2','3','4','5','6','7']
@@ -235,7 +249,7 @@ const Weather: React.FC = () => {
         <Box className={classes.leftSide}>
         <Box className={classes.titleBox}>
 
-        <button onClick={fetchWeatherData}>Get Weather</button>
+        <button className={classes.submitButton} onClick={fetchWeatherData}>Get Weather</button>
         </Box>
         <Box>
   
@@ -273,7 +287,11 @@ const Weather: React.FC = () => {
             </Grid>
         </Box>
         <Box className={classes.rightSide}>
+          <h1 className={classes.rightHeader}>Your Recommended Outfit</h1>
+          <Grid container columns={2}>
           <Outfit outfitPic={sunhat} heading={"Hat"} description={"Wide-brimmed sunhat"} icon={<Sun/>} chipColor={"warning"} chipDescription={"It is sunny outside!"}/>
+          <Outfit outfitPic={sunhat} heading={"Hat"} description={"Wide-brimmed sunhat"} icon={<Sun/>} chipColor={"warning"} chipDescription={"It is sunny outside!"}/>
+          </Grid>
         </Box>
     </Box>
       </Box>

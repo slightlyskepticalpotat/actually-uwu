@@ -27,6 +27,7 @@ export default function Outfit({ outfitPic, heading, description, icon, chipColo
         width: 320,
         borderColor: '#CAF0F8',
         '&:hover': { boxShadow: 'md', borderColor: '#78a2ab' },
+        margin: '1%'
       }}
     >
       <AspectRatio ratio="1" sx={{ width: 90 }}>
