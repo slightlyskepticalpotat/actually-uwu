@@ -14,7 +14,7 @@ interface OutfitProps {
     heading: string; 
     description: string;
     icon: ReactNode;
-    chipColor: unknown;
+    chipColor: Record<string, unknown>;
     chipDescription: string;
 }
 
