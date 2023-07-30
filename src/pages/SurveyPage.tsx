@@ -115,7 +115,9 @@ const SurveyPage = () => {
                   getOptionLabel={(option: CountryType) =>
                     `${option.label} (${option.code}) +${option.phone}`
                   }
-                  onChange={(event, value:CountryType) => setCountryCode(value.code)}
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore: Object is possibly 'null'.
+                  onChange = {(event, value:CountryType | null) => setCountryCode(value.code)}
                   renderInput={(params) => <TextField {...params} label="Choose a country" />}
                 />
             </Box>
