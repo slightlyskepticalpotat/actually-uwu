@@ -315,41 +315,40 @@ const Weather: React.FC = () => {
         <Box>
             {/* <pre>{JSON.stringify(preferences, null, 2)}</pre> */}
         <Box className={classes.root}>
-        
+
         <Box className={classes.leftSide}>
         <Box className={classes.titleBox}>
-        <Typography variant="h4">Location: {city}</Typography>
+        <Typography variant="h4" fontWeight={800} color='#1c2743'>Location: {city}</Typography>
         </Box>
         <CardActionArea>
-            <Box  className={classes.currentWeather}>
-                <Box height='80%' className={classes.header}  justify-content="center">Current Weather
-                    <Box height='90%' className={classes.iconAndTemp}   justifyContent="space-evenly">
-                        <img width="25%" src="icons/cloud.png"></img>
-                        <Box paddingBottom='3rem'>
-                            <Typography color='#4271E7' alignItems='end' fontSize='300%'fontWeight='700'>{currentTemp}°{useImperial ?"F":"C"}</Typography>
-                            <Typography color='gray' alignItems='end' fontSize='85%'>Feels like {feelsLike}°{useImperial ?"F":"C"}</Typography>
-                        </Box>
-                    </Box>
-                </Box>
-        
-                <Grid container columnSpacing={5}>
-                    {titleList}
-                </Grid>
-            </Box>
-            </CardActionArea>
+            <Card className={classes.currentWeather}>
+                        <Typography variant="h1" color='#1c2743' className={classes.header}>Current Weather</Typography>
+                            <Box className={classes.iconAndTemp}  justifyContent="space-evenly">
+                                <img width="40%" src="icons/cloud.png"></img>
+                                <Box paddingBottom='3rem'>
+                                    <Typography color='#4271E7' alignItems='end' fontSize='300%'fontWeight='700'>{currentTemp}°{useImperial ?"F":"C"}</Typography>
+                                    <Typography color='gray' alignItems='end' fontSize='85%'>Feels like {feelsLike}°{useImperial ?"F":"C"}</Typography>
+                                </Box>
+                            </Box>
+                        <Grid container columnSpacing={5}>
+                            {titleList}
+                        </Grid>
+                </Card>
+        </CardActionArea>
+
             <Grid container columns={8} className={classes.week}>
                 <Grid item xs={1}>
-                    <Card className={classes.blue}>
+                    <Box className={classes.blue}>
                         <Box className={classes.whiteUnderline}>Date</Box>
-                    </Card>
+                    </Box>
                 </Grid>
                     {dayList}
             </Grid>
         </Box>
         <Box className={classes.rightSide}>
-          <Typography className={classes.rightHeader}>Your Recommended Item</Typography>
+          <Typography variant="h4" color='#1c2743'>Your Recommended Item</Typography>
           <Outfit outfitPic={sunhat} heading={"Hat"} description={"Wide-brimmed sunhat"} icon={<Cloud/>} chipColor={"primary"} chipDescription={"The weather is a bit cloudy"}/>
-          <Typography className={classes.rightHeader}>Your Commute Method</Typography>
+          <Typography variant="h4" color='#1c2743'>Your Commute Method</Typography>
           <Card sx={{ maxWidth: 345 }}>
             <CardActionArea>
                 <CardMedia
