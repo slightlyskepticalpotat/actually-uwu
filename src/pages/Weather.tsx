@@ -1,6 +1,6 @@
 import { makeStyles } from '@mui/styles';
 import {Box, Grid, Typography} from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import 'dotenv/config'
 
 import COUNTRIES from '~/components/CountrySelect';
@@ -11,10 +11,6 @@ import Cloud from '@mui/icons-material/Cloud';
 import Sun from '@mui/icons-material/LightMode';
 
 import sunhat from '../images/outfits/sunhat.png';
-
-//https://api.openweathermap.org/geo/1.0/zip?zip=L6Y4W6,CA&appid=c0f957daa1315f627f7244c78fc760e7
-//
-
 
 const useStyles = makeStyles({
     root:{
@@ -125,103 +121,66 @@ const useStyles = makeStyles({
         }
     },
 })
-const days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
-const dayWeather = ['1','2','3','4','5','6','7']
-const dayList = days.map((day, index) =>
- <Grid item key = {index} xs={1}>
-  <Box sx={{
-        backgroundColor: 'white',
-        color: '#4271E7',
-        height: '100%',
-        borderRadius: '5%',
-        padding: '5%'
-    }}>
-      <Box sx={{borderBottom: '0.2rem solid #4271E7',
-        width: '100%',
-        display: 'block' }}>{day}</Box>
-
-        <Box sx={{
-        height:'100%',
-        align:'center',
-        alignItems:'center',
-        padding: '1rem'
-    }}>
-    <Typography align='center' alignItems='center'>{dayWeather[index]}</Typography>
-    </Box>
-  </Box>
-</Grid>
-);
 
 
-const subtitles = ['a', 'b', 'c', 'd'];
-const titles = ['Wind', 'Humidity', 'UV', 'Precipitation'];
-
-const titleList = titles.map((title, index) => 
-{
-if (index%2===0) {
-    return <Grid key = {index} item xs={3}>
-    <Box sx={{
-        backgroundColor: '#4271E7',
-        color: 'white',
-        height: '100%',
-        borderRadius: '5%',
-        padding: '5%'
-    }}>
-    <Box sx={{
-        borderBottom: '0.2rem solid white',
-        width: '100%',
-        display: 'block'
-        }}>{title}</Box>
-    <Box sx={{
-        height:'100%',
-        align:'center',
-        alignItems:'center',
-        padding: '1rem'
-    }}>
-    <Typography align='center' alignItems='center'>{subtitles[index]}</Typography>
-    </Box>
-    </Box>
-    </Grid>
+function kelvinToCelsius(kelvin: number): number {
+    const celsius = Math.round((kelvin - 273.15)*10)/10;
+    return celsius;
 }
-else{
-return <Grid key = {index} item xs={3}>
-    <Box sx={{
-        backgroundColor: 'white',
-        color: '#4271E7',
-        height: '100%',
-        borderRadius: '5%',
-        padding: '5%'
-    }}>
-    <Box sx={{
-        borderBottom: '0.2rem solid #4271E7',
-        width: '100%',
-        display: 'block'
-        }}>{title}</Box>
-    <Box sx={{
-        height:'100%',
-        align:'center',
-        alignItems:'center',
-        padding: '1rem'
-    }}>
-    <Typography color='light gray' align='center' alignItems='center' >{subtitles[index]}</Typography>
-    </Box>
-    </Box>
-    </Grid>
-}
-}
-);
 
-
-
-
+interface UserPreferences {
+    'imperial': boolean;
+    'commute': string;
+    'light-rain': boolean;
+    'heavy-rain': boolean;
+    'country-code': string;
+    'city': string;
+  }
+  
 
 const Weather: React.FC = () => {
-    const [city, setCity] = useState('');
-    const [weatherData, setWeatherData] = useState(null);
-    const [latitude, setLatitude] = useState(43.65);
-    const [longitude, setLongitude] = useState(-79.38);
+    const [preferences, setPreferences] = useState<UserPreferences | null>(null);
+
+    useEffect(() => {
+      // Retrieve the JSON string from localStorage
+      const preferencesJSON = localStorage.getItem('userPreferences');
+  
+      if (preferencesJSON) {
+        // Parse the JSON string back to an object
+        const parsedPreferences: UserPreferences = JSON.parse(preferencesJSON);
+        setPreferences(parsedPreferences);
+      }
+    }, []);
     
+    if(preferences){
+        const commute:string = preferences["commute"]["label"] 
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    const [weatherData, setWeatherData] = useState(null);
+    // const [latitude, setLatitude] = useState(43.65);
+    // const [longitude, setLongitude] = useState(-79.38);
+    const latitude:number = 43.65;
+    const longitude:number = -79.38;
+
     const classes= useStyles();
+    useEffect(() => {
     const fetchWeatherData = async () => {
       try {
           const options = {method: 'GET', headers: {accept: 'application/json'}};
@@ -233,41 +192,137 @@ const Weather: React.FC = () => {
           const jsonData = await response.json();
   
           console.log(jsonData)
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           setWeatherData(jsonData)
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+          return jsonData
   
       } catch (error) {
         console.error('Error fetching weather data:', error);
       }
     };
-  
+    fetchWeatherData();
+    // The dependency array is empty, so this effect runs only once on mount
+  }, []);
+
+
+    let currentTemp:number = weatherData ? weatherData["current"]["temp"]: 293;
+    currentTemp = kelvinToCelsius(currentTemp)
+
+    let feelsLike:number = weatherData ? weatherData["current"]["feels_like"]: 293;
+    feelsLike = kelvinToCelsius(feelsLike)
+
+    const titles = ['Wind', 'Humidity', 'UV', 'Pressure'];
+
+    const uvi = weatherData ? weatherData["current"]["uvi"]:0;
+    const wind = weatherData ? weatherData["current"]["wind_speed"]:0;
+    const humidity = weatherData ? weatherData["current"]["humidity"]:0; 
+    const pressure = weatherData ? weatherData["current"]["humidity"]:0; 
+    const subtitles = [wind, humidity, uvi, pressure]
+
+    const titleList = titles.map((title, index) => 
+    {
+    if (index%2===0) {
+        return <Grid key = {index} item xs={3}>
+        <Box sx={{
+            backgroundColor: '#4271E7',
+            color: 'white',
+            height: '100%',
+            borderRadius: '5%',
+            padding: '5%'
+        }}>
+        <Box sx={{
+            borderBottom: '0.2rem solid white',
+            width: '100%',
+            display: 'block'
+            }}>{title}</Box>
+        <Box sx={{
+            height:'100%',
+            align:'center',
+            alignItems:'center',
+            padding: '1rem'
+        }}>
+        <Typography align='center' alignItems='center'>{subtitles[index]}</Typography>
+        </Box>
+        </Box>
+        </Grid>
+        }
+        else{
+        return <Grid key = {index} item xs={3}>
+            <Box sx={{
+                backgroundColor: 'white',
+                color: '#4271E7',
+                height: '100%',
+                borderRadius: '5%',
+                padding: '5%'
+            }}>
+            <Box sx={{
+                borderBottom: '0.2rem solid #4271E7',
+                width: '100%',
+                display: 'block'
+                }}>{title}</Box>
+            <Box sx={{
+                height:'100%',
+                align:'center',
+                alignItems:'center',
+                padding: '1rem'
+            }}>
+            <Typography color='light gray' align='center' alignItems='center' >{subtitles[index]}</Typography>
+            </Box>
+            </Box>
+            </Grid>
+        }
+        }
+        );
+
+        const days = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
+
+        const dayWeather: number[] = []
+        for(let i = 0; i < 7; i++){
+            if(weatherData){
+                dayWeather.push(kelvinToCelsius(weatherData["daily"][i]["temp"]["day"]))
+            }   
+        }
+        
+        const dayList = days.map((day, index) =>
+        <Grid item key = {index} xs={1}>
+        <Box sx={{
+                backgroundColor: 'white',
+                color: '#4271E7',
+                height: '100%',
+                borderRadius: '5%',
+                padding: '5%'
+            }}>
+            <Box sx={{borderBottom: '0.2rem solid #4271E7',
+                width: '100%',
+                display: 'block' }}>{day}</Box>
+
+                <Box sx={{
+                height:'100%',
+                align:'center',
+                alignItems:'center',
+                padding: '1rem'
+            }}>
+            <Typography align='center' alignItems='center'>{dayWeather[index]}</Typography>
+            </Box>
+        </Box>
+        </Grid>
+        );
     return (
       <Box>
-        
-        
-<Box className={classes.root}>
+         <pre>{JSON.stringify(preferences, null, 2)}</pre>
+    <Box className={classes.root}>
         <Box className={classes.leftSide}>
         <Box className={classes.titleBox}>
 
-        <button className={classes.submitButton} onClick={fetchWeatherData}>Get Weather</button>
-        </Box>
-        <Box>
-  
-          {weatherData? (weatherData["timezone"]) : <p>no data yet</p>}
-          {weatherData ? (
-            <pre>{JSON.stringify(weatherData, null, 2)}</pre>
-          ) : (
-            <p>No data fetched yet.</p>
-          )}
+        {/* <button className={classes.submitButton} onClick={fetchWeatherData}>Get Weather</button> */}
         </Box>
             <Box  className={classes.currentWeather}>
                 <Box height='80%' className={classes.header}  justify-content="center">Current Weather
-                    <Typography color='gray' alignItems='start' fontSize='70%'paddingLeft='2rem'>1:05AM</Typography>
                     <Box height='90%' className={classes.iconAndTemp}   justifyContent="space-evenly">
                         <img width="25%" src="icons/cloud.png"></img>
-                        <Box >
-                            <Typography color='#4271E7' alignItems='end' fontSize='300%'fontWeight='700'>23°C</Typography>
-                            <Typography color='gray' alignItems='end' fontSize='85%'>Feels like 30°C</Typography>
+                        <Box paddingBottom='3rem'>
+                            <Typography color='#4271E7' alignItems='end' fontSize='300%'fontWeight='700'>{currentTemp}°C</Typography>
+                            <Typography color='gray' alignItems='end' fontSize='85%'>Feels like {feelsLike}°C</Typography>
                         </Box>
                     </Box>
                 </Box>
