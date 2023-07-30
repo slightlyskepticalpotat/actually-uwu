@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 import React from "react";
-import Link from "next/link";
+import { SignInButton } from "@clerk/clerk-react";
 
 const useStyles = makeStyles({
   loginButton: {
@@ -16,13 +16,9 @@ const useStyles = makeStyles({
 });
 
 const LoginButton = () => {
-  const classes = useStyles();
+  //const classes = useStyles();
 
-  return (
-    <Link className={classes.loginButton} href="/api/auth/login">
-      Login
-    </Link>
-  );
+  return <SignInButton>Login</SignInButton>;
 };
 
 export default LoginButton;
