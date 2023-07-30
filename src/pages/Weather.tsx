@@ -1,14 +1,14 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { makeStyles } from '@mui/styles';
 import {Box, Card, CardActionArea, CardContent, CardMedia, Grid, Typography} from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import 'dotenv/config'
 
-import COUNTRIES from '~/components/CountrySelect';
-import CountryType from '~/components/CountrySelect';
+// import CountryType from '~/components/CountrySelect';
 import Outfit from '~/components/Outfit';
 
 import Cloud from '@mui/icons-material/Cloud';
-import Sun from '@mui/icons-material/LightMode';
+// import Sun from '@mui/icons-material/LightMode';
 
 import sunhat from '../images/outfits/sunhat.png';
 
@@ -143,7 +143,6 @@ interface UserPreferences {
   
 
 const Weather: React.FC = () => {
-    const [preferences, setPreferences] = useState<UserPreferences | null>(null);
     const [useImperial, setUseImperial] = useState(false);
     const [city, setCity] = useState<string | null>(null);
     const [country, setCountry] = useState<string | null>(null);
@@ -156,12 +155,10 @@ const Weather: React.FC = () => {
       if (preferencesJSON) {
         // Parse the JSON string back to an object
         const parsedPreferences: UserPreferences = JSON.parse(preferencesJSON);
-        // setPreferences(parsedPreferences);
         setCity(parsedPreferences ? parsedPreferences.city : "Toronto")
-        console.log(city)
         setCountry( parsedPreferences ? parsedPreferences["country-code"] : "CA")
-        console.log(country)
         setUseImperial(parsedPreferences ? parsedPreferences.imperial :false);
+        // @ts-ignore
         setCommuteMethod(parsedPreferences ? parsedPreferences.commute["label"] :'Walking')
       }
       
