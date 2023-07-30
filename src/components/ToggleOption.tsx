@@ -34,7 +34,7 @@ const ToggleOption: React.FC<ToggleOptionProps> = ({ defaultText, optionText, de
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(event.target.checked);
     if (preferences && prop in preferences) {
-      preferences[prop] = event.target.checked;
+      // preferences[prop] = event.target.checked;
       //console.log(preferences.imperial)
       localStorage.setItem('userPreferences', JSON.stringify(preferences))
     }
