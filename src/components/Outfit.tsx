@@ -14,7 +14,8 @@ interface OutfitProps {
     heading: string; 
     description: string;
     icon: ReactNode;
-    chipColor: Record<string, unknown>;
+    // eslint-disable @typescript-eslint/no-explicit-any
+    chipColor: any;
     chipDescription: string;
 }
 
