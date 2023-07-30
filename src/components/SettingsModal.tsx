@@ -151,11 +151,12 @@ const SettingsModal = () => {
                         preferences.commute = value as string;
                         //console.log(preferences);
                       }
-                      //defaultValue = Preferences.commute;
                     }}
                     renderInput={(params) => <TextField required  {...params} 
                     label="Commute Method"
                     />}
+                    className="p1" 
+                    //defaultValue = Preferences.commute;
                 />
                 <Autocomplete
                     disablePortal
@@ -171,6 +172,7 @@ const SettingsModal = () => {
                     renderInput={(params) => <TextField required {...params} 
                     label="Light Rain"
                     />}
+                    className="p1" 
                 />
                 <Autocomplete
                     options={rainProtection}
@@ -183,8 +185,9 @@ const SettingsModal = () => {
                       }
                     }}
                     renderInput={(params) => <TextField required {...params} 
-                    label="Heavy Rain" 
+                    label="Heavy Rain"
                     />}
+                    className="p1" 
                 />
           </Typography>
         </Box>
