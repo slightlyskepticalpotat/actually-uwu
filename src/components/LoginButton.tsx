@@ -16,9 +16,13 @@ const useStyles = makeStyles({
 });
 
 const LoginButton = () => {
-  //const classes = useStyles();
+  const classes = useStyles();
 
-  return <SignInButton>Login</SignInButton>;
+  return (
+    <SignInButton mode="modal">
+      <button className={classes.loginButton}>Log in</button>
+    </SignInButton>
+  );
 };
 
 export default LoginButton;
