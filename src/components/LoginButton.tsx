@@ -1,25 +1,28 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from "@mui/styles";
 import React from "react";
+import { SignInButton } from "@clerk/clerk-react";
 
 const useStyles = makeStyles({
-  loginButton:{
-    width: '30%',
-    padding: '1rem 2rem',
-    borderRadius: '1rem',
-    border: '2px solid #546D64',
-    backgroundColor:'transparent',
-    '&:hover': {
-        backgroundColor: '#f0f0f0',
-    }
-  }
-})
+  loginButton: {
+    width: "30%",
+    padding: "1rem 2rem",
+    borderRadius: "1rem",
+    border: "2px solid #546D64",
+    backgroundColor: "transparent",
+    "&:hover": {
+      backgroundColor: "#f0f0f0",
+    },
+  },
+});
 
 const LoginButton = () => {
-  const classes= useStyles();
-  const { loginWithRedirect } = useAuth0();
+  const classes = useStyles();
 
-  return <button  className={classes.loginButton} onClick={() => loginWithRedirect()}>LOG IN</button>;
+  return (
+    <SignInButton mode="modal">
+      <button className={classes.loginButton}>Log in</button>
+    </SignInButton>
+  );
 };
 
 export default LoginButton;
