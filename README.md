@@ -1,28 +1,35 @@
-# Create T3 App
+# ActuallyUWU: Useful Weather Utility 
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+## Usage
+You can check out our hosted instance at [https://actuallyuwu.com](https://actuallyuwu.com).
 
-## What's next? How do I make an app with this?
+## Installation
+```bash
+git clone https://github.com/slightlyskepticalpotat/actually-uwu.git
+cd actually-uwu/
+npm install
+npm run build
+export DATABASE_URL=url API_URL='https://api.openweathermap.org/data/2.5' API_KEY=key FAST_REFRESH=false yarn start
+npm start
+```
+---
+## Inspiration
+Ever open a weather app to find temperature variations, humidity, sunrise, sunset, wind speeds, moon phases, a 14-day weather forecast spread out over seven different pages, and more? We did. Weather apps and sites often contain every little piece of information except your outfit and commute method.
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Function
+ActuallyUWU changes that. Our cross-platform web app intelligently analyses the weather in your area, interprets it with previously-selected preferences, and gives you instant tips on what to wear and how you should commute. Fair warning, you'll talk about weather less—since it's just not a concern anymore.
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+## Construction
+We bootstrapped our project with the T3 stack—TypeScript, Next.js, and tRPC. From there, we began building the UI while thinking about onboarding UX. In the end, our onboarding survey only asks five things but covers a range of scenarios. After that, we hosted it with Vercel and integrated the process with GitHub for rapid feedback, determined which APIs were best, and hacked on authentication.
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Challenges 
+Many challenges were encountered and successfully addressed. A particularly troublesome one was conflicting dependencies, but we discovered a workaround that worked on production. We also faced difficulty with smooth scrolling animations and using all the weather data, but just need more time.
 
-## Learn More
+## Successes
+We're particularly proud of our project management, since we brainstormed ideas before and got more progress done on the first day than at other hackathons. Other successes are a GitHub project board to keep track of tasks, coordinating virtually, and using Vercel and ESLint to verify commit robustness. 
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## Learning
+We struck a balance between team members doing things that were familar to them, helping each other, and completely venturing into the unknown. Most major components of our project (authentication, hosting, mongodb) were initially implemented by someone with little to no prior experience, before being reviewed and improved by another person that had more experience. We definitely learned tons.
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
-
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
-
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+## What's Next
+One next step is converting this into a native app for mobile devices. Another much-needed feature would be integration with Google Maps or a similar service to see commute weather. Finally, we need to integrate more science-backed health suggestions like our current ones about dangerous UV rays.
