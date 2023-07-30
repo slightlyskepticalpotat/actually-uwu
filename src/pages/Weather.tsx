@@ -123,9 +123,12 @@ const useStyles = makeStyles({
 })
 
 
-function kelvinToCelsius(kelvin: number): number {
-    const celsius = Math.round((kelvin - 273.15)*10)/10;
-    return celsius;
+function convertTemperature(kelvin: number, useImperial:boolean): number {
+    if(useImperial){
+        return (Math.round((kelvin - 273.15) * 9/5 + 32)*10)/10
+    }
+    return (Math.round((kelvin - 273.15)*10)/10);
+    
 }
 
 interface UserPreferences {
@@ -140,6 +143,10 @@ interface UserPreferences {
 
 const Weather: React.FC = () => {
     const [preferences, setPreferences] = useState<UserPreferences | null>(null);
+    const [useImperial, setUseImperial] = useState(false);
+    const [city, setCity] = useState<string | null>(null);
+    const [country, setCountry] = useState<string | null>(null);
+    const [latitude, setLatitude] = useState<number | null>(43.65);
 
     useEffect(() => {
       // Retrieve the JSON string from localStorage
@@ -148,44 +155,36 @@ const Weather: React.FC = () => {
       if (preferencesJSON) {
         // Parse the JSON string back to an object
         const parsedPreferences: UserPreferences = JSON.parse(preferencesJSON);
-        setPreferences(parsedPreferences);
+        // setPreferences(parsedPreferences);
+        const city = (parsedPreferences ? parsedPreferences.city : "Toronto")
+        console.log(city)
+        const country = ( parsedPreferences ? parsedPreferences['country-code'] : "CA")
+        console.log(country)
+        
+        
+        setUseImperial(parsedPreferences ? parsedPreferences.imperial :false);
       }
+      const GEOAPIREQ = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + ","+ country +"&limit=5&appid=c0f957daa1315f627f7244c78fc760e7";
+      console.log(GEOAPIREQ)
+      
     }, []);
     
-    if(preferences){
-        const commute:string = preferences["commute"]["label"] 
-    }
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     const [weatherData, setWeatherData] = useState(null);
-    // const [latitude, setLatitude] = useState(43.65);
+    
     // const [longitude, setLongitude] = useState(-79.38);
-    const latitude:number = 43.65;
+    // const latitude:number = 43.65;
     const longitude:number = -79.38;
 
     const classes= useStyles();
     useEffect(() => {
     const fetchWeatherData = async () => {
       try {
-          const options = {method: 'GET', headers: {accept: 'application/json'}};
+
+          
           // console.log(process.env.API_KEY)
-  
+
           const APIREQ = "https://api.openweathermap.org/data/3.0/onecall?lat=" + latitude + "&lon="+ longitude + "&appid=c0f957daa1315f627f7244c78fc760e7"
           const response = await fetch(APIREQ);
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -206,10 +205,10 @@ const Weather: React.FC = () => {
 
 
     let currentTemp:number = weatherData ? weatherData["current"]["temp"]: 293;
-    currentTemp = kelvinToCelsius(currentTemp)
+    currentTemp = convertTemperature(currentTemp, useImperial)
 
     let feelsLike:number = weatherData ? weatherData["current"]["feels_like"]: 293;
-    feelsLike = kelvinToCelsius(feelsLike)
+    feelsLike = convertTemperature(feelsLike, useImperial)
 
     const titles = ['Wind', 'Humidity', 'UV', 'Pressure'];
 
@@ -279,7 +278,7 @@ const Weather: React.FC = () => {
         const dayWeather: number[] = []
         for(let i = 0; i < 7; i++){
             if(weatherData){
-                dayWeather.push(kelvinToCelsius(weatherData["daily"][i]["temp"]["day"]))
+                dayWeather.push(convertTemperature(weatherData["daily"][i]["temp"]["day"], useImperial))
             }   
         }
         
@@ -302,27 +301,27 @@ const Weather: React.FC = () => {
                 alignItems:'center',
                 padding: '1rem'
             }}>
-            <Typography align='center' alignItems='center'>{dayWeather[index]}</Typography>
+            <Typography align='center' alignItems='center'>{dayWeather[index]}°{useImperial ?"F":"C"}</Typography>
             </Box>
         </Box>
         </Grid>
         );
     return (
       <Box>
-         <pre>{JSON.stringify(preferences, null, 2)}</pre>
+         {/* <pre>{JSON.stringify(preferences, null, 2)}</pre> */}
     <Box className={classes.root}>
+        
         <Box className={classes.leftSide}>
         <Box className={classes.titleBox}>
-
-        {/* <button className={classes.submitButton} onClick={fetchWeatherData}>Get Weather</button> */}
+        <Typography variant="h4">Location: {city}</Typography>
         </Box>
             <Box  className={classes.currentWeather}>
                 <Box height='80%' className={classes.header}  justify-content="center">Current Weather
                     <Box height='90%' className={classes.iconAndTemp}   justifyContent="space-evenly">
                         <img width="25%" src="icons/cloud.png"></img>
                         <Box paddingBottom='3rem'>
-                            <Typography color='#4271E7' alignItems='end' fontSize='300%'fontWeight='700'>{currentTemp}°C</Typography>
-                            <Typography color='gray' alignItems='end' fontSize='85%'>Feels like {feelsLike}°C</Typography>
+                            <Typography color='#4271E7' alignItems='end' fontSize='300%'fontWeight='700'>{currentTemp}°{useImperial ?"F":"C"}</Typography>
+                            <Typography color='gray' alignItems='end' fontSize='85%'>Feels like {feelsLike}°{useImperial ?"F":"C"}</Typography>
                         </Box>
                     </Box>
                 </Box>
