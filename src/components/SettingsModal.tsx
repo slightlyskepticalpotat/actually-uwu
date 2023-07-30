@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Modal from '@mui/material/Modal';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import ToggleVisibility from "./ToggleVisibility";
 import Button from "@mui/material/Button";
 import SettingsIcon from '@mui/icons-material/Settings';
 import ToggleOption from "./ToggleOption";

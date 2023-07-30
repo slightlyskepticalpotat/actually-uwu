@@ -1,13 +1,35 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Switch from '@mui/material/Switch';
 
 interface ToggleOptionProps {
   defaultText: string;
   optionText: string;
+  defaultOption?: boolean;
+  prop: string;
 };
 
-const ToggleOption: React.FC<ToggleOptionProps> = ({ defaultText, optionText }) => {
-  const [isChecked, setIsChecked] = React.useState(false);
+const ToggleOption: React.FC<ToggleOptionProps> = ({ defaultText, optionText, defaultOption, prop }) => {
+  const [isChecked, setIsChecked] = useState(false);
+  interface UserPreferences {
+    'imperial': boolean;
+    'commute': string;
+    'light-rain': boolean;
+    'heavy-rain': boolean;
+    'country-code': string;
+    'city': string;
+  }
+  const [preferences, setPreferences] = useState<UserPreferences | null>(null);
+  useEffect(() => {
+  // Retrieve the JSON string from localStorage
+  const preferencesJSON = localStorage.getItem('userPreferences');
+
+  if (preferencesJSON) {
+    // Parse the JSON string back to an object
+    const parsedPreferences: UserPreferences = JSON.parse(preferencesJSON);
+    setPreferences(parsedPreferences);
+    //console.log(preferences)
+  }}, []);
+  //console.log(localStorage.getItem('userPreferences'))
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(event.target.checked);
@@ -25,6 +47,7 @@ const ToggleOption: React.FC<ToggleOptionProps> = ({ defaultText, optionText }) 
         checked={isChecked}
         onChange={handleChange}
         inputProps={{ 'aria-label': 'controlled' }}
+        defaultChecked={defaultOption}
       />
       {isChecked ? optionText : defaultText}
     </div>
