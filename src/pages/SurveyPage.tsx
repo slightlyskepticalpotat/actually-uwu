@@ -126,6 +126,7 @@ const SurveyPage = () => {
               <TextField 
               label="City" 
               variant="outlined" 
+              required
               onChange={(event) => setCityCode(event.target.value)}
               /> 
             </Box>
